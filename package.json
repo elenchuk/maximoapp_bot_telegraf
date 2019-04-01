@@ -1,0 +1,26 @@
+{
+  "name": "telebot",
+  "version": "1.0.0",
+  "description": "Telegram bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/elenchuk/telebot.git"
+  },
+  "keywords": [
+    "telegram",
+    "bot"
+  ],
+  "author": "Elenchuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/elenchuk/telebot/issues"
+  },
+  "homepage": "https://gitlab.com/elenchuk/telebot#README",
+  "dependencies": {
+    "telegraf": "^3.28.0"
+  }
+}
