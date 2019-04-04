@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack && node dist/bundle.js",
-    "server": "webpack && p2 start dist/bundle.js",
-    "serverlist": "p2 list",
-    "serverstop": "p2 stop",
+    "server": "webpack && pm2 start dist/bundle.js",
+    "serverlist": "pm2 list",
+    "serverstop": "pm2 stop",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
