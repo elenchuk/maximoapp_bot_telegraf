@@ -1,5 +1,5 @@
 {
-  "name": "webpack-babel-example",
+  "name": "telebot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,14 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jhnns/webpack-babel-example.git"
+    "url": "git+https://gitlab.com/elenchuk/maximoapp_bot/"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jhnns/webpack-babel-example/issues"
-  },
-  "homepage": "https://github.com/jhnns/webpack-babel-example#readme",
+  "homepage": "https://gitlab.com/elenchuk/maximoapp_bot/#readme",
   "dependencies": {
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
