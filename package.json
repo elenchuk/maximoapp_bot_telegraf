@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack && node dist/bundle.js",
+    "startforever": "webpack && forever start dist/bundle.js",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
