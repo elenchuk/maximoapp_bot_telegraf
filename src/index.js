@@ -1,7 +1,8 @@
 import {firebaseconfig} from './environments';
+import {telegram_token} from "./environments";
 
 const Telegraf = require('telegraf');
-const bot = new Telegraf(process.env.BOT_TOKEN);
+const bot = new Telegraf(telegram_token);
 
 // Add additional services that you want to use
 require("firebase/database");
