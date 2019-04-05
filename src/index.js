@@ -13,17 +13,17 @@ let firebase = require("firebase/app");
 // Firebase initialize config
 firebase.initializeApp(firebaseconfig);
 
-let db = firebase.database().ref();
+let db = firebase.database().ref('answersdb/');
 
 bot.on('message', (ctx) => {
 
     //firebase search
-    db.orderByChild("vopros").equalTo(ctx.message.text).on('value', function (snapshot) {
+    db.orderByChild("question").equalTo(ctx.message.text).on('value', function (snapshot) {
         snapshot.forEach(function(childSnapshot) {
             var key = childSnapshot.key;
             var childData = childSnapshot.val();
-            console.log(childData.otvet);
-            ctx.telegram.sendMessage(ctx.from.id, childData.otvet);
+            console.log(childData.answer);
+            ctx.telegram.sendMessage(ctx.from.id, childData.answer);
 
         });
     });
