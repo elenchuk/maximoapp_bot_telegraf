@@ -74,12 +74,17 @@ bot.action("create", (ctx) => {
 bot.on('message', (ctx) => {
 
     //firebase search
-    questions.orderByChild("question").equalTo(ctx.message.text).on('value', function (snapshot) {
+    questions.orderByChild("question").equalTo(ctx.message.text).once('value', function (snapshot) {
 
         // Random answer
-        var rand_answer = Math.floor(Math.random()*(snapshot.numChildren()));
-        var childData = snapshot.val()[Object.keys(snapshot.val())[rand_answer]];
-        ctx.telegram.sendMessage(ctx.from.id, childData.answer);
+        if(snapshot.val()){
+            var rand_answer = Math.floor(Math.random()*(snapshot.numChildren()));
+            var childData = snapshot.val()[Object.keys(snapshot.val())[rand_answer]];
+            ctx.telegram.sendMessage(ctx.from.id, childData.answer);
+        }else {
+            ctx.telegram.sendMessage(ctx.from.id, 'no answer(');
+        }
+
 
         // Search by one value
         // snapshot.forEach(function(childSnapshot) {
