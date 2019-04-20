@@ -41,27 +41,46 @@ let user_settings = {};
 db.on('value', function (snapshot) {
 
     // Take all users uid from firebase
-    for(var key in snapshot.val()){
+    for(var user_key in snapshot.val()){
 
         // Set settings from firebase by user uid
-        let settings = db.child(key + '/settings/');
-        settings.once('value', function (snapshot) {
+        let projects = db.child(user_key + '/projects/');
+        projects.on('value', function (snapshot) {
+
+            for(var project_key in snapshot.val()){
+
+                snapshot.forEach(function(childSnapshot) {
+                    var project_data = childSnapshot.val();
+
+                    // Add all telegram tokens to user settings object
+                    user_settings[project_data.telegram_token]=user_key;
+                    console.log(project_data.telegram_token + ' ' + user_key);
+
+                    // Create new Telefram bot class with token
+                    const bot = new Telegraf(project_data.telegram_token);
+                    bot.use(composer);
+                    bot.startPolling();
+
+
+
+                });
+            }
 
             // Search by one value
-            snapshot.forEach(function(childSnapshot) {
-                var telegram_token = childSnapshot.val();
-
-                // Add all telegram tokens to user settings object
-                user_settings[telegram_token]=key;
-                console.log(telegram_token + ' ' + key);
-
-                // Create new Telefram bot class with token
-                const bot = new Telegraf(telegram_token)
-                bot.use(composer)
-                bot.startPolling()
-
-
-            });
+            // snapshot.forEach(function(childSnapshot) {
+            //     var telegram_token = childSnapshot.val();
+            //
+            //     // Add all telegram tokens to user settings object
+            //     user_settings[telegram_token]=key;
+            //     console.log(telegram_token + ' ' + key);
+            //
+            //     // Create new Telefram bot class with token
+            //     const bot = new Telegraf(telegram_token)
+            //     bot.use(composer)
+            //     bot.startPolling()
+            //
+            //
+            // });
         });
 
     }
