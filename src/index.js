@@ -41,26 +41,25 @@ let user_settings = {};
 db.on('value', function (snapshot) {
 
     // Take all users uid from firebase
-    for(var user_key in snapshot.val()){
+    for (var user_key in snapshot.val()) {
 
         // Set settings from firebase by user uid
         let projects = db.child(user_key + '/projects/');
         projects.on('value', function (snapshot) {
 
-            for(var project_key in snapshot.val()){
+            for (const project_key in snapshot.val()) {
 
-                snapshot.forEach(function(childSnapshot) {
-                    var project_data = childSnapshot.val();
+                snapshot.forEach(function (childSnapshot) {
+                    const project_data = childSnapshot.val();
 
                     // Add all telegram tokens to user settings object
-                    user_settings[project_data.telegram_token]=user_key;
+                    user_settings[project_data.telegram_token] = user_key;
                     console.log(project_data.telegram_token + ' ' + user_key);
 
                     // Create new Telefram bot class with token
                     const bot = new Telegraf(project_data.telegram_token);
                     bot.use(composer);
                     bot.startPolling();
-
 
 
                 });
@@ -86,9 +85,7 @@ db.on('value', function (snapshot) {
     }
 
 
-
     // Logic start
-
 
 
     // Add user info data on start command
@@ -113,38 +110,27 @@ db.on('value', function (snapshot) {
     });
 
 
-
     // Users questions and answers
     composer.on('message', (ctx) => {
-        questions = db.child(user_settings[ctx.tg.token] + '/aq_db/');
+        questions = db.child(user_settings[ctx.tg.token] + '/modules/aq/aq_db/');
         //firebase search
         questions.orderByChild("question").equalTo(ctx.message.text).once('value', function (snapshot) {
             // Random answer
-            if(snapshot.val()){
-                var rand_answer = Math.floor(Math.random()*(snapshot.numChildren()));
+            if (snapshot.val()) {
+                var rand_answer = Math.floor(Math.random() * (snapshot.numChildren()));
                 var childData = snapshot.val()[Object.keys(snapshot.val())[rand_answer]];
                 ctx.telegram.sendMessage(ctx.from.id, childData.answer);
-            }else {
+            } else {
                 ctx.telegram.sendMessage(ctx.from.id, 'no answer(');
             }
         });
     });
 
 
-
-
-
     // Logic end
 
 
-
 });
-
-
-
-
-
-
 
 
 // Add user info data on start command
@@ -196,13 +182,11 @@ db.on('value', function (snapshot) {
 // });
 
 
-
 // Launch Telegraf bot
 // bot.launch();
 
 
 // composer.command("start", Telegraf.reply("Hello world!"));
-
 
 
 // var tokens = ['464320818:AAFleQhEampTVJfLV_1xN1xNsQhjS-F9rgk','374400307:AAESYl39Ym3fmJN5ZibE2zFf1f0CEmdh9mA']
