@@ -8,9 +8,3 @@ export const firebaseconfig = {
     messagingSenderId: "859288362710"
 
 };
-
-// Telegram token
-// prod
-// export const telegram_token = '464320818:AAFleQhEampTVJfLV_1xN1xNsQhjS-F9rgk';
-// test
-// export const telegram_token = '374400307:AAESYl39Ym3fmJN5ZibE2zFf1f0CEmdh9mA';
